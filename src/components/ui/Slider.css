@@ -1,0 +1,107 @@
+.slider-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.slider-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.slider-label {
+  font-weight: 500;
+  color: var(--color-text-main);
+}
+
+.slider-value {
+  font-weight: 600;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+
+.slider-input-wrapper {
+  position: relative;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.slider-input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  outline: none;
+  position: absolute;
+  z-index: 1;
+  margin: 0;
+  cursor: pointer;
+}
+
+.slider-track-active {
+  position: absolute;
+  height: 6px;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
+  border-radius: var(--radius-full);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Chrome/Safari Thumb */
+.slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--color-primary);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 3;
+  margin-top: -7px; /* Centers thumb over track */
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.slider-input::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.slider-input::-webkit-slider-thumb:active {
+  transform: scale(0.95);
+  cursor: grabbing;
+}
+
+/* Firefox Thumb */
+.slider-input::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  border: 2px solid var(--color-primary);
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+  position: relative;
+  z-index: 3;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.slider-input::-moz-range-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.slider-input::-moz-range-thumb:active {
+  transform: scale(0.95);
+  cursor: grabbing;
+}

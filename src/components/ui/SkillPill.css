@@ -1,0 +1,46 @@
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.skill-pill-default {
+  background-color: var(--color-bg);
+  color: var(--color-text-main);
+  border: 1px solid var(--color-border);
+}
+
+.skill-pill-primary {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-hover);
+  border: 1px solid rgba(37, 99, 235, 0.2);
+}
+
+.skill-pill-missing {
+  background-color: hsl(0, 80%, 97%);
+  color: hsl(0, 70%, 50%);
+  border: 1px solid hsl(0, 70%, 85%);
+}
+
+.skill-pill-remove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem;
+  margin-right: -0.25rem;
+  border-radius: var(--radius-full);
+  color: inherit;
+  opacity: 0.6;
+  transition: opacity var(--transition-fast), background-color var(--transition-fast);
+}
+
+.skill-pill-remove:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.05);
+}
