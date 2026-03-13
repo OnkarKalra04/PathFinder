@@ -14,18 +14,21 @@
   background-color: var(--color-bg);
   color: var(--color-text-main);
   border: 1px solid var(--color-border);
+  transition: background-color var(--transition-theme), color var(--transition-theme), border-color var(--transition-theme);
 }
 
 .skill-pill-primary {
   background-color: var(--color-primary-light);
-  color: var(--color-primary-hover);
-  border: 1px solid rgba(37, 99, 235, 0.2);
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  opacity: 0.9;
 }
 
 .skill-pill-missing {
-  background-color: hsl(0, 80%, 97%);
-  color: hsl(0, 70%, 50%);
-  border: 1px solid hsl(0, 70%, 85%);
+  background-color: var(--color-warning-light);
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning);
+  opacity: 0.9;
 }
 
 .skill-pill-remove {
@@ -37,7 +40,7 @@
   border-radius: var(--radius-full);
   color: inherit;
   opacity: 0.6;
-  transition: opacity var(--transition-fast), background-color var(--transition-fast);
+  transition: opacity var(--transition-fast), background-color var(--transition-theme);
 }
 
 .skill-pill-remove:hover {

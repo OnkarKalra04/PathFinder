@@ -15,13 +15,15 @@
 
 /* Variants */
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, hsl(230, 90%, 60%) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, hsl(245, 82%, 50%) 100%);
   color: white;
   box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+  border: 1px solid transparent;
 }
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-1px);
+  filter: brightness(1.1);
   box-shadow: 0 6px 15px rgba(37, 99, 235, 0.3);
 }
 
@@ -39,6 +41,8 @@
 .btn-secondary:hover:not(:disabled) {
   background-color: var(--color-bg);
   border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 .btn-outline {

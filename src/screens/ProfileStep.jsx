@@ -1,12 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import * as pdfjsLib from 'pdfjs-dist';
+import mammoth from 'mammoth';
 import { useCareerContext } from '../context/CareerContext';
 import { SKILLS } from '../data/skills';
 import ProgressIndicator from '../components/ui/ProgressIndicator';
 import Button from '../components/ui/Button';
 import SkillPill from '../components/ui/SkillPill';
-import { Search, ChevronRight } from 'lucide-react';
+import { Search, ChevronRight, Upload, FileText, CheckCircle2 } from 'lucide-react';
 import './ProfileStep.css';
+
+// Initialize PDF.js worker
+pdfjsLib.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjsLib.version}/pdf.worker.min.mjs`;
 
 const INTERESTS_OPTIONS = [
   "Technology", "Business", "Creativity", "Research", "Leadership", "Problem Solving"
@@ -20,9 +25,12 @@ const ProfileStep = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
   
   const searchRef = useRef(null);
   const suggestionListRef = useRef(null);
+  const fileInputRef = useRef(null);
 
   // Sorting skills alphabetically A-Z just to be safe (though likely already sorted in data)
   const sortedSkills = [...SKILLS].sort((a, b) => a.localeCompare(b));
@@ -94,8 +102,76 @@ const ProfileStep = () => {
     }
   };
 
+  const handleCustomSkill = () => {
+    if (searchQuery.trim() !== '') {
+      addSkill(searchQuery.trim());
+      setShowSuggestions(false);
+    }
+  };
+
   const removeSkill = (skillToRemove) => {
     setUserSkills(prev => prev.filter(skill => skill !== skillToRemove));
+  };
+
+  // --- Resume Parsing Logic ---
+
+  const extractTextFromPDF = async (file) => {
+    const arrayBuffer = await file.arrayBuffer();
+    const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+    let text = '';
+    for (let i = 1; i <= pdf.numPages; i++) {
+        const page = await pdf.getPage(i);
+        const textContent = await page.getTextContent();
+        const pageText = textContent.items.map(item => item.str).join(' ');
+        text += pageText + ' ';
+    }
+    return text;
+  };
+
+  const extractTextFromDOCX = async (file) => {
+    const arrayBuffer = await file.arrayBuffer();
+    const result = await mammoth.extractRawText({ arrayBuffer });
+    return result.value;
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setIsUploading(true);
+    setUploadSuccess(false);
+    let extractedText = "";
+
+    try {
+      if (file.type === "application/pdf") {
+        extractedText = await extractTextFromPDF(file);
+      } else if (file.type === "application/vnd.openxmlformats-officedocument.wordprocessingml.document" || file.name.endsWith(".docx")) {
+        extractedText = await extractTextFromDOCX(file);
+      } else {
+        alert("Unsupported file format. Please upload PDF or DOCX.");
+        setIsUploading(false);
+        return;
+      }
+
+      // Match extracted text against the library
+      const textLower = extractedText.toLowerCase();
+      const matchedSkills = SKILLS.filter(skill => textLower.includes(skill.toLowerCase()));
+
+      setUserSkills(prev => {
+        const uniqueSkills = new Set([...prev, ...matchedSkills]);
+        // Limit to 15
+        return Array.from(uniqueSkills).slice(0, 15);
+      });
+      
+      setUploadSuccess(true);
+      setTimeout(() => setUploadSuccess(false), 3000);
+      
+    } catch (error) {
+      console.error("Resume Parsing Error:", error);
+      alert("Failed to parse resume. Please try again or enter skills manually.");
+    } finally {
+      setIsUploading(false);
+    }
   };
 
   const handleKeyDown = (e) => {
@@ -114,6 +190,10 @@ const ProfileStep = () => {
       } else if (availableSkills.length === 1 && searchQuery.trim() !== '') {
         // If there's exactly one match and user hits enter, accept it
         addSkill(availableSkills[0]);
+      } else if (searchQuery.trim() !== '') {
+        // Allow treating it as a custom skill if no matches align exactly
+        addSkill(searchQuery.trim());
+        setShowSuggestions(false);
       }
     } else if (e.key === 'Escape') {
       setShowSuggestions(false);
@@ -189,6 +269,43 @@ const ProfileStep = () => {
 
         <div className="form-section">
           <label>Your Professional Skills ({userSkills.length}/15)</label>
+
+          <div 
+            className="resume-upload-container" 
+            onClick={() => fileInputRef.current?.click()}
+          >
+            <input 
+              type="file" 
+              ref={fileInputRef} 
+              className="hidden-input" 
+              accept=".pdf,.docx" 
+              onChange={handleFileUpload}
+              disabled={isUploading}
+            />
+            <div className="upload-content">
+              {isUploading ? (
+                <>
+                  <FileText className="upload-icon pulse" size={32} />
+                  <span className="uploading-text">Parsing Resume...</span>
+                </>
+              ) : uploadSuccess ? (
+                <>
+                  <CheckCircle2 color="var(--color-primary)" size={32} />
+                  <span className="text-sm font-medium" style={{ color: 'var(--color-primary)' }}>Skills Extracted Successfully!</span>
+                </>
+              ) : (
+                <>
+                  <Upload className="upload-icon" size={32} />
+                  <span className="font-medium">Upload Resume to Auto-Fill Skills</span>
+                  <span className="text-muted text-sm">Supports PDF & DOCX</span>
+                  <p className="text-xs text-muted" style={{ marginTop: '4px', maxWidth: '300px' }}>
+                    We'll extract your experience and automatically select matching skills below.
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+
           <div className="skill-input-header">
             <p className="text-sm text-muted">Select 3 to 15 skills to help us match you with careers.</p>
             {isMaxSkillsReached && <span className="text-sm font-medium text-error">You can select up to 15 skills.</span>}
@@ -226,7 +343,14 @@ const ProfileStep = () => {
                     </div>
                   ))
                 ) : (
-                  <div className="suggestion-empty">No skills found.</div>
+                  <div className="suggestion-empty">
+                    <span>No matching skills found.</span>
+                    {searchQuery.trim() !== '' && (
+                       <button className="add-custom-skill-btn" onClick={handleCustomSkill}>
+                         + Add "{searchQuery.trim()}" as custom skill
+                       </button>
+                    )}
+                  </div>
                 )}
               </div>
             )}

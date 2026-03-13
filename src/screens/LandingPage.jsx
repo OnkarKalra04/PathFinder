@@ -51,30 +51,30 @@ const LandingPage = () => {
       <section className="how-it-works-section">
         <h2 className="text-center" style={{ marginBottom: 'var(--space-6)' }}>How It Works</h2>
         <div className="grid md:grid-cols-3 gap-6">
-          <Card hoverable className="step-card text-center">
+          <Card className="static-step-card text-center">
             <div className="step-icon">
               <Compass size={32} />
             </div>
             <h3>Step 1</h3>
-            <p><strong>Tell us about yourself</strong></p>
+            <p className="step-card-title">Tell us about yourself</p>
             <p className="text-muted text-sm mt-2">Enter your current education, experience, and professional skills.</p>
           </Card>
           
-          <Card hoverable className="step-card text-center">
+          <Card className="static-step-card text-center">
             <div className="step-icon">
               <Target size={32} />
             </div>
             <h3>Step 2</h3>
-            <p><strong>Compare career paths</strong></p>
+            <p className="step-card-title">Compare career paths</p>
             <p className="text-muted text-sm mt-2">Select the careers you're interested in and compare them across key factors.</p>
           </Card>
           
-          <Card hoverable className="step-card text-center">
+          <Card className="static-step-card text-center">
             <div className="step-icon">
               <Award size={32} />
             </div>
             <h3>Step 3</h3>
-            <p><strong>Get your career match</strong></p>
+            <p className="step-card-title">Get your career match</p>
             <p className="text-muted text-sm mt-2">Weigh your priorities to calculate your personalized career match score.</p>
           </Card>
         </div>

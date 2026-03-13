@@ -13,7 +13,7 @@
 .results-hero h1 {
   font-size: var(--text-4xl);
   margin-bottom: var(--space-2);
-  background: linear-gradient(135deg, var(--color-primary) 0%, hsl(280, 80%, 60%) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -43,8 +43,8 @@
 }
 
 .suggested-icon {
-  color: var(--color-secondary);
-  background-color: hsl(280, 80%, 95%);
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
   padding: 0.5rem;
   border-radius: var(--radius-md);
   box-sizing: content-box;
@@ -65,7 +65,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  background: linear-gradient(135deg, var(--color-primary) 0%, hsl(230, 90%, 60%) 100%);
+  background: linear-gradient(135deg, var(--color-success) 0%, hsl(150, 70%, 35%) 100%);
   color: white;
   padding: 0.25rem 1rem;
   font-size: var(--text-xs);
@@ -103,6 +103,7 @@
   font-size: var(--text-lg);
   border: 2px solid var(--color-primary);
   flex-shrink: 0;
+  transition: all var(--transition-theme);
 }
 
 .result-factors-grid {
@@ -153,10 +154,11 @@
 }
 
 .result-explanation {
-  background-color: hsl(220, 50%, 98%);
+  background-color: var(--color-bg);
   padding: var(--space-4);
   border-radius: var(--radius-md);
-  border-left: 3px solid var(--color-secondary);
+  border-left: 3px solid var(--color-success);
+  transition: background-color var(--transition-theme), border-color var(--transition-theme);
 }
 
 .explanation-title {
@@ -171,8 +173,230 @@
   line-height: 1.5;
 }
 
+/* --- Modals for Path Details --- */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--space-4);
+  animation: fadeIn var(--transition-normal);
+}
+
+.modal-content {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-xl);
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  position: relative;
+  animation: slideUp var(--transition-normal);
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-header {
+  padding: var(--space-4) var(--space-6);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--color-bg);
+}
+
+.modal-header h3 {
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.modal-close-btn {
+  color: var(--color-text-muted);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.modal-close-btn:hover {
+  background-color: var(--color-surface);
+  color: var(--color-text-main);
+  box-shadow: var(--shadow-sm);
+}
+
+.modal-body {
+  padding: var(--space-6);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.result-transition-section,
+.result-roadmap-section {
+  padding-top: var(--space-2);
+}
+
+.transition-path-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.transition-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  background-color: var(--color-surface);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+.step-number {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-primary);
+  background-color: var(--color-primary-light);
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.step-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-main);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.roadmap-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  position: relative;
+  padding-left: var(--space-2);
+}
+
+.roadmap-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(var(--space-2) + 4px);
+  width: 2px;
+  background-color: var(--color-border);
+  z-index: 1;
+}
+
+.roadmap-phase {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  position: relative;
+  z-index: 2;
+}
+
+.phase-marker {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  box-shadow: 0 0 0 4px var(--color-bg);
+  margin-top: 6px;
+  flex-shrink: 0;
+}
+
+.phase-content {
+  background-color: var(--color-surface);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  flex-grow: 1;
+}
+
+.phase-title {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  color: var(--color-secondary);
+  margin-bottom: var(--space-1);
+  letter-spacing: 0.05em;
+}
+
+.phase-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-main);
+  line-height: 1.4;
+  margin: 0;
+}
+
 .results-footer {
   margin-top: var(--space-4);
   padding-top: var(--space-6);
   border-top: 1px solid var(--color-border);
+}
+
+/* AI Roadmap Section Styles */
+.ai-roadmap-section {
+  padding: var(--space-6);
+  background: linear-gradient(to bottom right, var(--color-bg), var(--color-surface));
+  border: 1px dashed var(--color-primary-light);
+  border-radius: var(--radius-lg);
+  position: relative;
+}
+
+.ai-badge-header {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  background-color: var(--color-primary-light);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
+}
+
+.ai-timeline::before {
+  background: linear-gradient(to bottom, var(--color-primary), var(--color-secondary));
+  opacity: 0.5;
+}
+
+.ai-marker {
+  background-color: var(--color-primary);
+  box-shadow: 0 0 0 4px var(--color-primary-light);
+}
+
+.ai-content {
+  border-color: var(--color-primary-light);
+  background-color: var(--color-bg);
+}
+
+.spin-animation {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  100% { transform: rotate(360deg); }
 }

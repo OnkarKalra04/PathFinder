@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useCareerContext } from '../context/CareerContext';
 import ProgressIndicator from '../components/ui/ProgressIndicator';
 import Button from '../components/ui/Button';
-import { ChevronRight, ChevronLeft, RefreshCcw, Equal } from 'lucide-react';
+import { ChevronRight, ChevronLeft, RefreshCcw, Equal, Info } from 'lucide-react';
+import './PriorityStep.css';
 import './PriorityStep.css';
 
 const PriorityStep = () => {
@@ -96,53 +97,135 @@ const PriorityStep = () => {
         )}
 
         <div className="point-allocation-wrapper">
+          
+          {/* Salary Potential */}
           <div className="point-input-group">
-            <label>Salary Potential</label>
-            <input 
-              type="number" 
-              className="form-control text-center point-input"
-              value={priorities.salary || ''}
-              onChange={(e) => handleInputChange('salary', e.target.value)}
-              min="0"
-              placeholder="0"
-            />
+            <div className="point-header">
+              <div className="point-header-left">
+                <label>Salary Potential</label>
+                <div className="tooltip-container">
+                  <Info size={16} className="tooltip-icon" />
+                  <span className="tooltip-text">Estimated earning potential in this career.</span>
+                </div>
+              </div>
+            </div>
+            <div className="point-controls">
+              <input 
+                type="range" 
+                className="slider-control" 
+                min="0" 
+                max="100" 
+                value={priorities.salary || 0} 
+                onChange={(e) => handleInputChange('salary', e.target.value)}
+              />
+              <input 
+                type="number" 
+                className="form-control point-input"
+                value={priorities.salary || ''}
+                onChange={(e) => handleInputChange('salary', e.target.value)}
+                min="0"
+                max="100"
+                placeholder="0"
+              />
+            </div>
           </div>
           
+          {/* Work-Life Balance */}
           <div className="point-input-group">
-            <label>Work-Life Balance</label>
-            <input 
-              type="number" 
-              className="form-control text-center point-input"
-              value={priorities.wlb || ''}
-              onChange={(e) => handleInputChange('wlb', e.target.value)}
-              min="0"
-              placeholder="0"
-            />
+            <div className="point-header">
+              <div className="point-header-left">
+                <label>Work-Life Balance</label>
+                <div className="tooltip-container">
+                  <Info size={16} className="tooltip-icon" />
+                  <span className="tooltip-text">How manageable work hours and lifestyle are.</span>
+                </div>
+              </div>
+            </div>
+            <div className="point-controls">
+              <input 
+                type="range" 
+                className="slider-control" 
+                min="0" 
+                max="100" 
+                value={priorities.wlb || 0} 
+                onChange={(e) => handleInputChange('wlb', e.target.value)}
+              />
+              <input 
+                type="number" 
+                className="form-control point-input"
+                value={priorities.wlb || ''}
+                onChange={(e) => handleInputChange('wlb', e.target.value)}
+                min="0"
+                max="100"
+                placeholder="0"
+              />
+            </div>
           </div>
 
+          {/* Networking Opportunity */}
           <div className="point-input-group">
-            <label>Networking Opportunity</label>
-            <input 
-              type="number" 
-              className="form-control text-center point-input"
-              value={priorities.networking || ''}
-              onChange={(e) => handleInputChange('networking', e.target.value)}
-              min="0"
-              placeholder="0"
-            />
+            <div className="point-header">
+              <div className="point-header-left">
+                <label>Networking Opportunity</label>
+                <div className="tooltip-container">
+                  <Info size={16} className="tooltip-icon" />
+                  <span className="tooltip-text">How much interaction and relationship-building the role involves.</span>
+                </div>
+              </div>
+            </div>
+            <div className="point-controls">
+              <input 
+                type="range" 
+                className="slider-control" 
+                min="0" 
+                max="100" 
+                value={priorities.networking || 0} 
+                onChange={(e) => handleInputChange('networking', e.target.value)}
+              />
+              <input 
+                type="number" 
+                className="form-control point-input"
+                value={priorities.networking || ''}
+                onChange={(e) => handleInputChange('networking', e.target.value)}
+                min="0"
+                max="100"
+                placeholder="0"
+              />
+            </div>
           </div>
 
+          {/* Learning Opportunity */}
           <div className="point-input-group">
-            <label>Learning Opportunity</label>
-            <input 
-              type="number" 
-              className="form-control text-center point-input"
-              value={priorities.learning || ''}
-              onChange={(e) => handleInputChange('learning', e.target.value)}
-              min="0"
-              placeholder="0"
-            />
+             <div className="point-header">
+              <div className="point-header-left">
+                <label>Learning Opportunity</label>
+                <div className="tooltip-container">
+                  <Info size={16} className="tooltip-icon" />
+                  <span className="tooltip-text">How much skill growth and development the career offers.</span>
+                </div>
+              </div>
+            </div>
+            <div className="point-controls">
+              <input 
+                type="range" 
+                className="slider-control" 
+                min="0" 
+                max="100" 
+                value={priorities.learning || 0} 
+                onChange={(e) => handleInputChange('learning', e.target.value)}
+              />
+              <input 
+                type="number" 
+                className="form-control point-input"
+                value={priorities.learning || ''}
+                onChange={(e) => handleInputChange('learning', e.target.value)}
+                min="0"
+                max="100"
+                placeholder="0"
+              />
+            </div>
           </div>
+
         </div>
 
         <div className="helper-actions mt-6">

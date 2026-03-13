@@ -298,5 +298,299 @@ export const CAREERS = [
     name: "Urban Planner",
     factors: { salary: 72, wlb: 85, networking: 75, learning: 80 },
     skills: ["Land Use Planning", "GIS Mapping", "Policy Analysis", "Public Policy", "Stakeholder Engagement", "Sustainability", "Data Analysis", "Project Management", "Communication", "Zoning Regulations"]
+  },
+  {
+    id: "data-engineer",
+    name: "Data Engineer",
+    factors: { salary: 90, wlb: 65, networking: 50, learning: 85 },
+    skills: ["Python", "SQL", "Spark", "Data Pipelines", "Hadoop", "ETL", "Cloud Architecture", "Problem Solving", "Java", "System Design"]
+  },
+  {
+    id: "cloud-architect",
+    name: "Cloud Architect",
+    factors: { salary: 94, wlb: 65, networking: 65, learning: 90 },
+    skills: ["AWS", "System Architecture", "Security", "Infrastructure as Code", "Networking", "Kubernetes", "Leadership", "Communication", "Problem Solving", "Azure"]
+  },
+  {
+    id: "ux-researcher",
+    name: "UX Researcher",
+    factors: { salary: 82, wlb: 80, networking: 70, learning: 85 },
+    skills: ["User Interviews", "Usability Testing", "Data Analysis", "Empathy", "A/B Testing", "Survey Design", "Communication", "Qualitative Research", "Figma", "Storytelling"]
+  },
+  {
+    id: "growth-product-manager",
+    name: "Growth Product Manager",
+    factors: { salary: 88, wlb: 60, networking: 85, learning: 85 },
+    skills: ["A/B Testing", "Data Analytics", "User Acquisition", "Conversion Rate Optimization", "Growth Strategy", "Product Strategy", "Agile", "Communication", "Experimentation", "Prioritization"]
+  },
+  {
+    id: "revenue-operations-manager",
+    name: "Revenue Operations Manager",
+    factors: { salary: 85, wlb: 65, networking: 75, learning: 80 },
+    skills: ["Salesforce", "Data Analysis", "Process Optimization", "Revenue Forecasting", "Business Intelligence", "Communication", "Cross-functional Leadership", "Excel", "Strategy", "Problem Solving"]
+  },
+  {
+    id: "private-equity-analyst",
+    name: "Private Equity Analyst",
+    factors: { salary: 94, wlb: 30, networking: 90, learning: 90 },
+    skills: ["Financial Modeling", "Due Diligence", "LBO Modeling", "Valuation", "Excel", "Market Research", "Negotiation", "Networking", "Strategic Thinking", "Attention to Detail"]
+  },
+  {
+    id: "quantitative-analyst",
+    name: "Quantitative Analyst",
+    factors: { salary: 95, wlb: 55, networking: 50, learning: 95 },
+    skills: ["Mathematics", "Python", "Statistical Analysis", "Algorithms", "C++", "Machine Learning", "Financial Markets", "Problem Solving", "R", "Data Mining"]
+  },
+  {
+    id: "healthcare-consultant",
+    name: "Healthcare Consultant",
+    factors: { salary: 88, wlb: 55, networking: 85, learning: 85 },
+    skills: ["Healthcare Regulations", "Data Analysis", "Project Management", "Strategy", "Process Optimization", "Communication", "Client Management", "Presentation", "Financial Analysis", "Problem Solving"]
+  },
+  {
+    id: "clinical-research-analyst",
+    name: "Clinical Research Analyst",
+    factors: { salary: 75, wlb: 75, networking: 60, learning: 85 },
+    skills: ["Clinical Trials", "Data Analysis", "Regulatory Compliance", "Scientific Writing", "Attention to Detail", "Ethics", "Statistics", "Communication", "Project Management", "Research"]
+  },
+  {
+    id: "policy-advisor",
+    name: "Policy Advisor",
+    factors: { salary: 78, wlb: 70, networking: 85, learning: 80 },
+    skills: ["Public Policy", "Research", "Legislative Process", "Stakeholder Management", "Writing", "Public Speaking", "Data Interpretation", "Advocacy", "Critical Thinking", "Negotiation"]
+  },
+  {
+    id: "urban-development-specialist",
+    name: "Urban Development Specialist",
+    factors: { salary: 74, wlb: 80, networking: 75, learning: 80 },
+    skills: ["Urban Planning", "Sustainability", "GIS", "Public Policy", "Project Management", "Community Engagement", "Data Analysis", "Zoning Regulations", "Communication", "Problem Solving"]
+  },
+  {
+    id: "supply-chain-analyst",
+    name: "Supply Chain Analyst",
+    factors: { salary: 76, wlb: 75, networking: 65, learning: 75 },
+    skills: ["Logistics", "Data Analysis", "Excel", "Process Optimization", "Inventory Management", "Forecasting", "ERP Systems", "Problem Solving", "Negotiation", "Communication"]
+  },
+  {
+    id: "operations-consultant",
+    name: "Operations Consultant",
+    factors: { salary: 88, wlb: 50, networking: 85, learning: 85 },
+    skills: ["Process Optimization", "Lean Six Sigma", "Data Analysis", "Change Management", "Project Management", "Client Management", "Strategy", "Problem Solving", "Communication", "Financial Modeling"]
+  },
+  {
+    id: "technical-writer",
+    name: "Technical Writer",
+    factors: { salary: 72, wlb: 85, networking: 50, learning: 80 },
+    skills: ["Writing", "Editing", "API Documentation", "Software Engineering Concepts", "Communication", "Attention to Detail", "Research", "Markdown", "Information Architecture", "Empathy"]
+  },
+  {
+    id: "game-producer",
+    name: "Game Producer",
+    factors: { salary: 82, wlb: 60, networking: 80, learning: 80 },
+    skills: ["Project Management", "Agile", "Team Leadership", "Budgeting", "Communication", "Game Mechanics", "Risk Management", "Negotiation", "Time Management", "Creativity"]
+  },
+  {
+    id: "film-editor",
+    name: "Film Editor",
+    factors: { salary: 70, wlb: 60, networking: 70, learning: 75 },
+    skills: ["Video Editing", "Adobe Premiere Pro/Final Cut", "Storytelling", "Color Grading", "Audio Mixing", "Creativity", "Time Management", "Attention to Detail", "Collaboration", "Patience"]
+  },
+  {
+    id: "media-strategist",
+    name: "Media Strategist",
+    factors: { salary: 78, wlb: 70, networking: 85, learning: 80 },
+    skills: ["Media Planning", "Data Analytics", "Digital Marketing", "Campaign Management", "Negotiation", "Communication", "Budgeting", "Trend Spotting", "Strategy", "Creativity"]
+  },
+  {
+    id: "sports-analyst",
+    name: "Sports Analyst",
+    factors: { salary: 75, wlb: 65, networking: 80, learning: 75 },
+    skills: ["Statistical Analysis", "Data Visualization", "Sports Knowledge", "Communication", "Predictive Modeling", "Python", "SQL", "Reporting", "Critical Thinking", "Attention to Detail"]
+  },
+  {
+    id: "environmental-scientist",
+    name: "Environmental Scientist",
+    factors: { salary: 70, wlb: 80, networking: 60, learning: 85 },
+    skills: ["Data Analysis", "Field Research", "Environmental Compliance", "GIS", "Scientific Writing", "Sustainability", "Problem Solving", "Critical Thinking", "Communication", "Report Writing"]
+  },
+  {
+    id: "renewable-energy-engineer",
+    name: "Renewable Energy Engineer",
+    factors: { salary: 82, wlb: 75, networking: 65, learning: 90 },
+    skills: ["System Design", "CAD", "Energy Modeling", "Sustainability", "Project Management", "Data Analysis", "Problem Solving", "Physics", "Communication", "Innovation"]
+  },
+  {
+    id: "biotech-researcher",
+    name: "Biotech Researcher",
+    factors: { salary: 84, wlb: 70, networking: 60, learning: 95 },
+    skills: ["Experimental Design", "Data Analysis", "Molecular Biology", "Scientific Writing", "Laboratory Techniques", "Critical Thinking", "Problem Solving", "Ethics", "Communication", "Collaboration"]
+  },
+  {
+    id: "psychologist",
+    name: "Psychologist",
+    factors: { salary: 80, wlb: 80, networking: 60, learning: 90 },
+    skills: ["Empathy", "Active Listening", "Counseling", "Data Analysis", "Diagnostics", "Patience", "Communication", "Ethics", "Critical Thinking", "Report Writing"]
+  },
+  {
+    id: "therapist",
+    name: "Therapist",
+    factors: { salary: 70, wlb: 85, networking: 50, learning: 80 },
+    skills: ["Counseling", "Active Listening", "Empathy", "Conflict Resolution", "Patience", "Ethics", "Communication", "Mental Health Assessment", "Boundary Setting", "Record Keeping"]
+  },
+  {
+    id: "public-relations-manager",
+    name: "Public Relations Manager",
+    factors: { salary: 78, wlb: 65, networking: 95, learning: 75 },
+    skills: ["Media Relations", "Crisis Management", "Corporate Communications", "Writing", "Networking", "Strategic Planning", "Public Speaking", "Event Management", "Adaptability", "Creativity"]
+  },
+  {
+    id: "event-manager",
+    name: "Event Manager",
+    factors: { salary: 65, wlb: 55, networking: 90, learning: 70 },
+    skills: ["Event Planning", "Budgeting", "Vendor Management", "Logistics", "Networking", "Problem Solving", "Communication", "Time Management", "Negotiation", "Creativity"]
+  },
+  {
+    id: "behavioral-scientist",
+    name: "Behavioral Scientist",
+    factors: { salary: 82, wlb: 80, networking: 65, learning: 90 },
+    skills: ["Experiment Design", "Data Analysis", "Psychology", "Statistical Analysis", "Consumer Behavior", "Research", "Communication", "Ethics", "Critical Thinking", "Scientific Writing"]
+  },
+  {
+    id: "business-intelligence-analyst",
+    name: "Business Intelligence Analyst",
+    factors: { salary: 80, wlb: 75, networking: 60, learning: 80 },
+    skills: ["SQL", "Tableau", "Power BI", "Data Modeling", "Reporting", "Data Analysis", "Business Acumen", "Dashboard Creation", "Communication", "Problem Solving"]
+  },
+  {
+    id: "digital-transformation-consultant",
+    name: "Digital Transformation Consultant",
+    factors: { salary: 90, wlb: 55, networking: 85, learning: 90 },
+    skills: ["Change Management", "Technology Strategy", "Process Optimization", "Project Management", "Client Management", "Data Analysis", "Cloud Computing", "Communication", "Leadership", "Agile"]
+  },
+  {
+    id: "customer-success-manager",
+    name: "Customer Success Manager",
+    factors: { salary: 78, wlb: 80, networking: 90, learning: 75 },
+    skills: ["Relationship Building", "Account Management", "Onboarding", "Problem Solving", "Communication", "Empathy", "Salesforce", "Data Analysis", "Product Knowledge", "Retention Strategy"]
+  },
+  {
+    id: "platform-engineer",
+    name: "Platform Engineer",
+    factors: { salary: 92, wlb: 70, networking: 55, learning: 85 },
+    skills: ["Kubernetes", "Docker", "CI/CD", "Infrastructure as Code", "Go", "Python", "Cloud Architecture", "System Design", "Automation", "Problem Solving"]
+  },
+  {
+    id: "solutions-architect",
+    name: "Solutions Architect",
+    factors: { salary: 95, wlb: 65, networking: 85, learning: 90 },
+    skills: ["System Architecture", "Cloud Computing", "Client Management", "Communication", "Problem Solving", "API Design", "Security", "Pre-Sales", "Technical Leadership", "Networking"]
+  },
+  {
+    id: "infrastructure-engineer",
+    name: "Infrastructure Engineer",
+    factors: { salary: 88, wlb: 65, networking: 50, learning: 85 },
+    skills: ["Linux", "Networking", "Security", "Automation", "Cloud Services", "Troubleshooting", "System Administration", "Puppet/Chef", "Scripting", "Problem Solving"]
+  },
+  {
+    id: "devops-architect",
+    name: "DevOps Architect",
+    factors: { salary: 96, wlb: 60, networking: 70, learning: 90 },
+    skills: ["CI/CD Strategy", "Kubernetes", "Cloud Architecture", "Leadership", "Security", "Automation", "Monitoring", "System Design", "Infrastructure as Code", "Communication"]
+  },
+  {
+    id: "ai-product-manager",
+    name: "AI Product Manager",
+    factors: { salary: 94, wlb: 60, networking: 85, learning: 95 },
+    skills: ["Product Strategy", "Machine Learning Concepts", "Data Analytics", "Roadmapping", "Ethics in AI", "User Research", "Communication", "Agile", "Prioritization", "Stakeholder Management"]
+  },
+  {
+    id: "fintech-product-manager",
+    name: "Fintech Product Manager",
+    factors: { salary: 92, wlb: 55, networking: 85, learning: 85 },
+    skills: ["Product Strategy", "Financial Regulations", "Payment Systems", "Data Analysis", "Agile", "User Research", "Communication", "Roadmapping", "Risk Management", "Prioritization"]
+  },
+  {
+    id: "edtech-product-manager",
+    name: "EdTech Product Manager",
+    factors: { salary: 86, wlb: 70, networking: 80, learning: 85 },
+    skills: ["Product Strategy", "Learning Theory", "User Research", "Agile", "Data Analytics", "Communication", "Roadmapping", "Empathy", "Prioritization", "Stakeholder Management"]
+  },
+  {
+    id: "healthtech-product-manager",
+    name: "HealthTech Product Manager",
+    factors: { salary: 90, wlb: 65, networking: 80, learning: 90 },
+    skills: ["Product Strategy", "Healthcare Regulations", "User Research", "Data Privacy", "Agile", "Communication", "Roadmapping", "Data Analysis", "Prioritization", "Stakeholder Management"]
+  },
+  {
+    id: "blockchain-engineer",
+    name: "Blockchain Engineer",
+    factors: { salary: 95, wlb: 65, networking: 60, learning: 95 },
+    skills: ["Cryptography", "Smart Contracts", "Solidity", "System Design", "Algorithms", "C++", "Security", "Problem Solving", "Networking", "Distributed Systems"]
+  },
+  {
+    id: "iot-engineer",
+    name: "IoT Engineer",
+    factors: { salary: 88, wlb: 70, networking: 55, learning: 90 },
+    skills: ["Embedded Systems", "C/C++", "Networking Protocols", "Cloud Architecture", "Hardware Interfacing", "Security", "Python", "Problem Solving", "System Architecture", "Sensor Data Analysis"]
+  },
+  {
+    id: "robotics-engineer",
+    name: "Robotics Engineer",
+    factors: { salary: 90, wlb: 65, networking: 60, learning: 95 },
+    skills: ["C++", "ROS", "Machine Learning", "Computer Vision", "Kinematics", "System Design", "Hardware Programming", "Math", "Algorithms", "Problem Solving"]
+  },
+  {
+    id: "systems-engineer",
+    name: "Systems Engineer",
+    factors: { salary: 86, wlb: 70, networking: 65, learning: 85 },
+    skills: ["System Architecture", "Integration", "Requirements Analysis", "Testing", "Linux", "Troubleshooting", "Project Management", "Communication", "Security", "Problem Solving"]
+  },
+  {
+    id: "semiconductor-engineer",
+    name: "Semiconductor Engineer",
+    factors: { salary: 92, wlb: 60, networking: 55, learning: 90 },
+    skills: ["Circuit Design", "VLSI", "Physics", "Testing", "Hardware Description Languages", "Problem Solving", "Materials Science", "CAD", "Attention to Detail", "Data Analysis"]
+  },
+  {
+    id: "aerospace-engineer",
+    name: "Aerospace Engineer",
+    factors: { salary: 88, wlb: 65, networking: 60, learning: 90 },
+    skills: ["Aerodynamics", "CAD", "Physics", "Materials Science", "System Design", "Testing", "Math", "Problem Solving", "Project Management", "Compliance"]
+  },
+  {
+    id: "civil-engineer",
+    name: "Civil Engineer",
+    factors: { salary: 78, wlb: 70, networking: 65, learning: 80 },
+    skills: ["AutoCAD", "Structural Analysis", "Project Management", "Surveying", "Materials Science", "Regulations Compliance", "Problem Solving", "Math", "Communication", "Budgeting"]
+  },
+  {
+    id: "mechanical-engineer",
+    name: "Mechanical Engineer",
+    factors: { salary: 80, wlb: 70, networking: 60, learning: 80 },
+    skills: ["CAD/CAM", "Thermodynamics", "Materials Science", "Manufacturing Processes", "Testing", "Problem Solving", "Project Management", "Math", "Communication", "Robotics Basics"]
+  },
+  {
+    id: "chemical-engineer",
+    name: "Chemical Engineer",
+    factors: { salary: 85, wlb: 65, networking: 55, learning: 85 },
+    skills: ["Process Design", "Chemistry", "Thermodynamics", "Safety Regulations", "Problem Solving", "Math", "Data Analysis", "Project Management", "Testing", "Sustainability"]
+  },
+  {
+    id: "biomedical-engineer",
+    name: "Biomedical Engineer",
+    factors: { salary: 84, wlb: 70, networking: 65, learning: 90 },
+    skills: ["Medical Device Design", "Biology", "Testing", "FDA Regulations", "CAD", "Problem Solving", "Data Analysis", "Materials Science", "Communication", "Clinical Trials"]
+  },
+  {
+    id: "sales-engineer",
+    name: "Sales Engineer",
+    factors: { salary: 90, wlb: 60, networking: 95, learning: 80 },
+    skills: ["Technical Presentations", "B2B Sales", "Client Management", "System Architecture Knowledge", "Communication", "Problem Solving", "Negotiation", "Networking", "Product Demos", "Salesforce"]
+  },
+  {
+    id: "technical-recruiter",
+    name: "Technical Recruiter",
+    factors: { salary: 75, wlb: 75, networking: 95, learning: 70 },
+    skills: ["Sourcing", "Technical Screening", "Networking", "Negotiation", "Communication", "Applicant Tracking Systems", "Relationship Building", "Sales", "Data Tracking", "Empathy"]
   }
 ];
