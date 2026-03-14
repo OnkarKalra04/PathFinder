@@ -27,6 +27,20 @@ export const CareerProvider = ({ children }) => {
     learning: 25
   });
 
+  // Saved Roadmaps State
+  const [savedRoadmaps, setSavedRoadmaps] = useState([]);
+  const [activeTab, setActiveTab] = useState('my-careers'); // 'explore', 'my-careers', 'roadmaps'
+
+  const saveRoadmap = (career) => {
+    if (!savedRoadmaps.find(r => r.id === career.id)) {
+      setSavedRoadmaps([...savedRoadmaps, career]);
+    }
+  };
+
+  const unsaveRoadmap = (careerId) => {
+    setSavedRoadmaps(savedRoadmaps.filter(r => r.id !== careerId));
+  };
+
   const value = {
     currentStep,
     setCurrentStep,
@@ -37,7 +51,12 @@ export const CareerProvider = ({ children }) => {
     selectedCareers,
     setSelectedCareers,
     priorities,
-    setPriorities
+    setPriorities,
+    savedRoadmaps,
+    saveRoadmap,
+    unsaveRoadmap,
+    activeTab,
+    setActiveTab
   };
 
   return (

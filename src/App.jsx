@@ -8,6 +8,7 @@ import ComparisonStep from './screens/ComparisonStep';
 import PriorityStep from './screens/PriorityStep';
 import ResultsPage from './screens/ResultsPage';
 import TopNav from './components/ui/TopNav';
+import BottomNav from './components/ui/BottomNav';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </main>
+          <BottomNav />
         </div>
       </BrowserRouter>
     </CareerProvider>

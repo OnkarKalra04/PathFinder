@@ -2,186 +2,217 @@ export const CAREERS = [
   {
     id: "software-engineer",
     name: "Software Engineer",
+    description: "Builds and maintains complex software systems, applications, and frameworks. Involves coding, debugging, and system design.",
     factors: { salary: 85, wlb: 65, networking: 60, learning: 80 },
     skills: ["JavaScript", "React", "Node.js", "System Design", "Problem Solving", "Software Engineering", "Git", "API Design", "Agile Methodology", "Communication"]
   },
   {
     id: "data-scientist",
     name: "Data Scientist",
+    description: "Extracts insights from large datasets using statistical analysis and machine learning. Helps businesses make data-driven decisions.",
     factors: { salary: 88, wlb: 60, networking: 55, learning: 85 },
     skills: ["Python", "Machine Learning", "Statistical Analysis", "Data Visualization", "SQL", "Feature Engineering", "Model Evaluation", "Data Cleaning", "Experiment Design", "Data Storytelling"]
   },
   {
     id: "data-analyst",
     name: "Data Analyst",
+    description: "Examines data to identify trends and create visualizations that help organizations understand their performance and opportunities.",
     factors: { salary: 75, wlb: 75, networking: 50, learning: 70 },
     skills: ["Excel", "SQL", "Data Visualization", "Dashboard Creation", "Business Intelligence", "Reporting", "Data Cleaning", "Statistical Basics", "Trend Analysis", "Data Interpretation"]
   },
   {
     id: "ai-ml-engineer",
     name: "AI / ML Engineer",
+    description: "Specializes in developing algorithms and models that enable machines to learn and make intelligent decisions from data.",
     factors: { salary: 92, wlb: 60, networking: 60, learning: 90 },
     skills: ["Python", "Machine Learning", "Deep Learning", "Natural Language Processing", "Computer Vision", "Model Evaluation", "Software Engineering", "Problem Solving", "Mathematics", "Cloud Computing"]
   },
   {
     id: "cybersecurity-analyst",
     name: "Cybersecurity Analyst",
+    description: "Protects an organization's computer networks and systems by monitoring for security breaches and responding to cyber attacks.",
     factors: { salary: 82, wlb: 65, networking: 65, learning: 85 },
     skills: ["Network Security", "Penetration Testing", "Threat Intelligence", "Incident Response", "Cryptography", "Compliance", "Problem Solving", "Scripting", "System Administration", "Communication"]
   },
   {
     id: "cloud-engineer",
     name: "Cloud Engineer",
+    description: "Designs, maintains, and manages cloud infrastructure and services to ensure scalable and reliable computing environments.",
     factors: { salary: 86, wlb: 70, networking: 60, learning: 85 },
     skills: ["AWS", "Azure", "Google Cloud", "Infrastructure as Code", "Terraform", "Docker", "Kubernetes", "System Design", "Networking", "Problem Solving"]
   },
   {
     id: "devops-engineer",
     name: "DevOps Engineer",
+    description: "Bridges the gap between development and operations teams, automating deployment pipelines and infrastructure management.",
     factors: { salary: 87, wlb: 65, networking: 55, learning: 85 },
     skills: ["CI/CD", "Docker", "Kubernetes", "AWS", "Linux", "Scripting", "Automation", "Monitoring", "System Administration", "Troubleshooting"]
   },
   {
     id: "ui-ux-designer",
     name: "UI/UX Designer",
+    description: "Focuses on the visual design and user experience of digital products, ensuring they are both beautiful and easy to use.",
     factors: { salary: 78, wlb: 75, networking: 65, learning: 80 },
     skills: ["UI Design", "UX Design", "Wireframing", "Prototyping", "Figma", "User Research", "Interaction Design", "Usability Testing", "Information Architecture", "Empathy"]
   },
   {
     id: "product-manager",
     name: "Product Manager",
+    description: "Defines the vision and roadmap for products, coordinating between engineering, design, and business teams.",
     factors: { salary: 85, wlb: 55, networking: 90, learning: 85 },
     skills: ["Product Strategy", "Roadmapping", "User Research", "Stakeholder Management", "Agile Methodology", "Product Analytics", "Market Research", "Communication", "Problem Solving", "Prioritization"]
   },
   {
     id: "technical-program-manager",
     name: "Technical Program Manager",
+    description: "Oversees large-scale technical projects, managing schedules, dependencies, and stakeholders across multiple teams.",
     factors: { salary: 90, wlb: 60, networking: 85, learning: 80 },
     skills: ["Project Management", "Agile Methodology", "Stakeholder Management", "Risk Management", "Software Engineering Concepts", "Cross-functional Leadership", "Communication", "Planning", "Prioritization", "Negotiation"]
   },
   {
     id: "business-analyst",
     name: "Business Analyst",
+    description: "Identifies business needs and determines solutions to business problems, often bridging the gap between business and IT.",
     factors: { salary: 75, wlb: 70, networking: 75, learning: 75 },
     skills: ["Requirements Gathering", "Process Modeling", "Data Analysis", "SQL", "Stakeholder Management", "Excel", "Communication", "Problem Solving", "Business Intelligence", "Agile Methodology"]
   },
   {
     id: "management-consultant",
     name: "Management Consultant",
+    description: "Helps organizations improve their performance by analyzing existing problems and developing plans for improvement.",
     factors: { salary: 92, wlb: 40, networking: 90, learning: 85 },
     skills: ["Problem Solving", "Strategic Thinking", "Financial Modeling", "Data Analysis", "Communication", "Presentation Skills", "Project Management", "Client Management", "Business Acumen", "Adaptability"]
   },
   {
     id: "operations-manager",
     name: "Operations Manager",
+    description: "Ensures that business operations are efficient and effective, managing resources and optimizing workflows.",
     factors: { salary: 80, wlb: 65, networking: 70, learning: 70 },
     skills: ["Process Optimization", "Supply Chain Management", "Logistics", "Budgeting", "Team Leadership", "Problem Solving", "Data Analysis", "Project Management", "Negotiation", "Communication"]
   },
   {
     id: "marketing-manager",
     name: "Marketing Manager",
+    description: "Develops and executes marketing strategies to promote products or services and reach target audiences.",
     factors: { salary: 82, wlb: 70, networking: 85, learning: 75 },
     skills: ["Marketing Strategy", "Campaign Management", "Customer Segmentation", "Digital Marketing", "Brand Positioning", "Content Strategy", "Growth Strategy", "Data Analytics", "Communication", "Creativity"]
   },
   {
     id: "sales-manager",
     name: "Sales Manager",
+    description: "Leads sales teams to reach targets, managing customer relationships and developing sales strategies.",
     factors: { salary: 85, wlb: 60, networking: 90, learning: 70 },
     skills: ["B2B Sales", "Negotiation", "Account Management", "Lead Generation", "CRM (Salesforce)", "Communication", "Persuasion", "Relationship Building", "Presentation Skills", "Team Leadership"]
   },
   {
     id: "growth-manager",
     name: "Growth Manager",
+    description: "Focuses on rapid user acquisition and retention, using data and experimentation to scale business performance.",
     factors: { salary: 84, wlb: 65, networking: 80, learning: 85 },
     skills: ["Growth Strategy", "A/B Testing", "Data Analytics", "Performance Marketing", "User Acquisition", "Retention Strategy", "SEO/SEM", "Conversion Rate Optimization", "Experimentation", "Creativity"]
   },
   {
     id: "strategy-analyst",
     name: "Strategy Analyst",
+    description: "Conducts research and analysis to support strategic decision-making and long-term organizational planning.",
     factors: { salary: 85, wlb: 60, networking: 80, learning: 85 },
     skills: ["Strategic Planning", "Market Research", "Competitive Analysis", "Financial Modeling", "Data Analysis", "Problem Solving", "Presentation Skills", "Communication", "Business Acumen", "Excel"]
   },
   {
     id: "project-manager",
     name: "Project Manager",
+    description: "Plans, executes, and closes projects, ensuring they are completed on time, within budget, and to required standards.",
     factors: { salary: 78, wlb: 70, networking: 75, learning: 70 },
     skills: ["Project Management", "Agile/Scrum", "Risk Management", "Budgeting", "Resource Scheduling", "Communication", "Stakeholder Management", "Problem Solving", "Leadership", "Organization"]
   },
   {
     id: "entrepreneur-founder",
     name: "Entrepreneur / Founder",
+    description: "Starts and grows new business ventures, taking on significant risks and managing all aspects of the startup.",
     factors: { salary: 95, wlb: 30, networking: 95, learning: 90 },
     skills: ["Vision & Strategy", "Leadership", "Fundraising", "Sales", "Product Discovery", "Resilience", "Networking", "Problem Solving", "Risk Taking", "Adaptability"]
   },
   {
     id: "venture-capital-analyst",
     name: "Venture Capital Analyst",
+    description: "Evaluates investment opportunities in startups and supports portfolio companies with strategic advice and networking.",
     factors: { salary: 88, wlb: 50, networking: 95, learning: 90 },
     skills: ["Financial Modeling", "Due Diligence", "Market Research", "Networking", "Valuation", "Critical Thinking", "Communication", "Trend Analysis", "Pitch Evaluation", "Negotiation"]
   },
   {
     id: "investment-banker",
     name: "Investment Banker",
+    description: "Advises corporations and governments on raising capital and executing mergers and acquisitions.",
     factors: { salary: 96, wlb: 25, networking: 85, learning: 80 },
     skills: ["Financial Modeling", "Valuation", "M&A", "Corporate Finance", "Excel", "Pitch Decks", "Work Ethic", "Attention to Detail", "Quantitative Analysis", "Networking"]
   },
   {
     id: "financial-analyst",
     name: "Financial Analyst",
+    description: "Analyzes financial data to help businesses make informed decisions about investments and financial planning.",
     factors: { salary: 78, wlb: 70, networking: 60, learning: 75 },
     skills: ["Financial Analysis", "Excel", "Forecasting", "Budgeting", "Financial Reporting", "Data Analysis", "Accounting Principles", "Attention to Detail", "Communication", "Business Acumen"]
   },
   {
     id: "chartered-accountant",
     name: "Chartered Accountant",
+    description: "Professional accountant who provides specialized advice on financial matters, taxation, and auditing.",
     factors: { salary: 85, wlb: 60, networking: 65, learning: 75 },
     skills: ["Accounting", "Taxation", "Auditing", "Financial Reporting", "Compliance", "Attention to Detail", "Excel", "Analytical Skills", "Ethics", "Communication"]
   },
   {
     id: "risk-analyst",
     name: "Risk Analyst",
+    description: "Identifies and assesses potential risks that could affect an organization's financial stability and operations.",
     factors: { salary: 80, wlb: 75, networking: 60, learning: 75 },
     skills: ["Risk Assessment", "Statistical Analysis", "Data Modeling", "Regulatory Compliance", "Problem Solving", "Attention to Detail", "Financial Acumen", "Communication", "SQL", "Excel"]
   },
   {
     id: "portfolio-manager",
     name: "Portfolio Manager",
+    description: "Manages investment portfolios for individuals or institutions, making decisions on asset allocation and strategy.",
     factors: { salary: 90, wlb: 55, networking: 80, learning: 80 },
     skills: ["Investment Strategy", "Asset Allocation", "Risk Management", "Financial Analysis", "Market Research", "Decision Making", "Performance Tracking", "Client Communication", "Economics", "Leadership"]
   },
   {
     id: "corporate-finance-manager",
     name: "Corporate Finance Manager",
+    description: "Oversees a company's financial activities, including capital budgeting, financial planning, and risk management.",
     factors: { salary: 88, wlb: 60, networking: 75, learning: 75 },
     skills: ["Corporate Finance", "Capital Budgeting", "Financial Planning", "Cash Flow Management", "M&A Integration", "Leadership", "Strategic Planning", "Presentation Skills", "Excel", "Accounting"]
   },
   {
     id: "digital-marketing-manager",
     name: "Digital Marketing Manager",
+    description: "Manages an organization's digital marketing efforts, including SEO, social media, and online advertising.",
     factors: { salary: 76, wlb: 70, networking: 75, learning: 80 },
     skills: ["SEO/SEM", "Social Media Advertising", "Email Marketing", "Content Marketing", "Data Analytics (Google Analytics)", "Campaign Management", "Conversion Optimization", "Copywriting", "Budget Management", "Creativity"]
   },
   {
     id: "brand-manager",
     name: "Brand Manager",
+    description: "Develops and maintains a brand's image and reputation, coordinating marketing and communication efforts.",
     factors: { salary: 78, wlb: 70, networking: 80, learning: 75 },
     skills: ["Brand Strategy", "Market Research", "Consumer Behavior", "Creative Direction", "Campaign Execution", "Communication", "Storytelling", "Budget Management", "Public Relations", "Project Management"]
   },
   {
     id: "content-strategist",
     name: "Content Strategist",
+    description: "Plans and executes content across various digital platforms, ensuring it aligns with brand goals and audience needs.",
     factors: { salary: 72, wlb: 80, networking: 65, learning: 75 },
     skills: ["Content Strategy", "Copywriting", "SEO Content", "Editing", "Audience Research", "Storytelling", "Content Management Systems (CMS)", "Analytics", "Creativity", "Project Management"]
   },
   {
     id: "social-media-manager",
     name: "Social Media Manager",
+    description: "Manages an organization's social media presence, creating content and engaging with the community.",
     factors: { salary: 65, wlb: 75, networking: 80, learning: 70 },
     skills: ["Social Media Strategy", "Content Creation", "Community Management", "Analytics Output", "Copywriting", "Trend Spotting", "Graphic Design Basics", "Customer Service", "Creativity", "Communication"]
   },
   {
     id: "graphic-designer",
     name: "Graphic Designer",
+    description: "Creates visual concepts using computer software or by hand to communicate ideas that inspire, inform, or captivate consumers.",
     factors: { salary: 65, wlb: 80, networking: 60, learning: 70 },
     skills: ["Adobe Creative Suite", "Typography", "Visual Communication", "Layout Design", "Branding", "Creativity", "Attention to Detail", "Time Management", "Client Communication", "Illustration"]
   },

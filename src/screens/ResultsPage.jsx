@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { useCareerContext } from '../context/CareerContext';
 import { CAREERS } from '../data/careers';
 import Button from '../components/ui/Button';
@@ -9,7 +10,12 @@ import { useNavigate } from 'react-router-dom';
 import './ResultsPage.css';
 
 const ResultsPage = () => {
-  const { selectedCareers, priorities, userSkills, setCurrentStep, setPriorities, setSelectedCareers, setUserSkills, setUserProfile } = useCareerContext();
+  const { 
+    selectedCareers, priorities, userSkills, 
+    setCurrentStep, setPriorities, setSelectedCareers, 
+    setUserSkills, setUserProfile, savedRoadmaps, 
+    saveRoadmap, unsaveRoadmap, activeTab, setActiveTab 
+  } = useCareerContext();
   const navigate = useNavigate();
   
   const [activeModal, setActiveModal] = useState(null);
@@ -19,14 +25,25 @@ const ResultsPage = () => {
   const [isGeneratingAI, setIsGeneratingAI] = useState(false);
   const [showAIRoadmap, setShowAIRoadmap] = useState(false);
   
-  // Close modal when hitting ESC
+  // Close modal when hitting ESC, and manage body scroll
   useEffect(() => {
     const handleEsc = (e) => {
       if (e.key === 'Escape') setActiveModal(null);
     };
+    
+    // Prevent body scrolling when modal is open
+    if (activeModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
     window.addEventListener('keydown', handleEsc);
-    return () => window.removeEventListener('keydown', handleEsc);
-  }, []);
+    return () => {
+      window.removeEventListener('keydown', handleEsc);
+      document.body.style.overflow = ''; // Cleanup on unmount
+    };
+  }, [activeModal]);
 
   // 1. Calculate matching score
   const calculateScore = (career) => {
@@ -81,6 +98,34 @@ const ResultsPage = () => {
     ];
   };
 
+  // Sub-component for Explore Careers card with flip animation
+  const ExploreCard = ({ career }) => {
+    const [isFlipped, setIsFlipped] = useState(false);
+    
+    // Fallback description if not provided in data
+    const description = career.description || `A dynamic career path in ${career.name}, focusing on leveraging key skills to solve complex problems and drive value.`;
+
+    return (
+      <div 
+        className={`explore-card-container ${isFlipped ? 'is-flipped' : ''}`}
+        onClick={() => setIsFlipped(!isFlipped)}
+      >
+        <div className="flip-card-inner">
+          <div className="flip-card-front">
+            <h3 className="result-career-name">{career.name}</h3>
+            <p className="tap-hint" style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 'var(--space-2)' }}>
+              Click to learn more
+            </p>
+          </div>
+          <div className="flip-card-back">
+            <h4>{career.name}</h4>
+            <p>{description}</p>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   // 5. Generate Career Roadmap
   const generateRoadmap = (missingSkills) => {
     const skillsList = missingSkills.length > 0
@@ -95,8 +140,8 @@ const ResultsPage = () => {
     ];
   };
 
-  // 6. Process all careers
-  const allScoredCareers = CAREERS.map(c => {
+  // 6. Process all careers helper
+  const processCareer = (c) => {
     const missing = getMissingSkills(c.skills);
     return {
       ...c,
@@ -106,7 +151,9 @@ const ResultsPage = () => {
       transitionPath: generateTransitionPath(missing),
       roadmap: generateRoadmap(missing)
     };
-  });
+  };
+
+  const allScoredCareers = CAREERS.map(processCareer);
 
   // 7. Separate user-selected vs suggested
   let selected = allScoredCareers.filter(c => selectedCareers.includes(c.id));
@@ -117,71 +164,98 @@ const ResultsPage = () => {
   
   const suggested = unselected.slice(0, 3);
 
-  const renderCareerCard = (career, isTopMatch = false) => (
-    <Card key={career.id} className={`result-card ${isTopMatch ? 'result-card-top' : ''}`}>
-      {isTopMatch && (
-        <div className="best-match-badge">
-          <Star size={14} fill="currentColor" /> Best Match
-        </div>
-      )}
-      
-      <div className="result-card-header">
-        <h3 className="result-career-name">{career.name}</h3>
-        <div className="result-score-circle">
-          <span>{career.matchScore}</span>
-        </div>
-      </div>
+  const renderCareerCard = (career, isTopMatch = false, isExplore = false) => {
+    if (isExplore) {
+      return <ExploreCard key={career.id} career={career} />;
+    }
 
-      <div className="result-explanation">
-        <h4 className="explanation-title">Career Fit Summary</h4>
-        <p className="explanation-text">{career.explanation}</p>
-      </div>
+    return (
+      <Card key={career.id} className={`result-card ${isTopMatch ? 'result-card-top' : ''}`}>
+        {isTopMatch && (
+          <div className="best-match-badge">
+            <Star size={14} fill="currentColor" /> Best Match
+          </div>
+        )}
+        
+        <div className="result-card-header">
+          <h3 className="result-career-name">{career.name}</h3>
+          <div className="result-score-circle">
+            <span className="fit-score-label">Fit Score</span>
+            <span className="fit-score-value">{career.matchScore}</span>
+          </div>
+        </div>
 
-      <div className="result-factors-grid">
-        <div className="result-factor">
-          <span className="rf-label">Salary</span>
-          <span className="rf-value">{career.factors.salary}</span>
+        <div className="result-explanation">
+          <h4 className="explanation-title">Career Fit Summary</h4>
+          <p className="explanation-text">{career.explanation}</p>
         </div>
-        <div className="result-factor">
-          <span className="rf-label">WLB</span>
-          <span className="rf-value">{career.factors.wlb}</span>
-        </div>
-        <div className="result-factor">
-          <span className="rf-label">Network</span>
-          <span className="rf-value">{career.factors.networking}</span>
-        </div>
-        <div className="result-factor">
-          <span className="rf-label">Learning</span>
-          <span className="rf-value">{career.factors.learning}</span>
-        </div>
-      </div>
 
-      <div className="result-skills-section">
-        <h4 className="skills-to-build-title">Skills Overview</h4>
-        <div className="missing-skills-flex">
-          {career.missingSkills.length > 0 ? (
-            // Only show up to 3 here to prevent clutter, the rest in details
-            career.missingSkills.slice(0, 3).map(s => <SkillPill key={s} skill={s} variant="missing" />)
-          ) : (
-            <span className="text-sm text-muted">You have all core skills!</span>
+        <div className="result-factors-grid" style={{ marginTop: 'var(--space-4)' }}>
+          <div className="result-factor">
+            <span className="rf-label">Salary</span>
+            <span className="rf-value">{career.factors.salary}</span>
+          </div>
+          <div className="result-factor">
+            <span className="rf-label">WLB</span>
+            <span className="rf-label">WLB</span>
+            <span className="rf-value">{career.factors.wlb}</span>
+          </div>
+          <div className="result-factor">
+            <span className="rf-label">Network</span>
+            <span className="rf-value">{career.factors.networking}</span>
+          </div>
+          <div className="result-factor">
+            <span className="rf-label">Learning</span>
+            <span className="rf-value">{career.factors.learning}</span>
+          </div>
+        </div>
+
+        <div className="result-skills-section">
+          <h4 className="skills-to-build-title">Skills Overview</h4>
+          <div className="missing-skills-flex">
+            {career.missingSkills.length > 0 ? (
+              career.missingSkills.slice(0, 3).map(s => <SkillPill key={s} skill={s} variant="missing" />)
+            ) : (
+              <span className="text-sm text-muted">You have all core skills!</span>
+            )}
+            {career.missingSkills.length > 3 && (
+              <span className="text-xs text-muted" style={{ padding: '0.25rem' }}>+{career.missingSkills.length - 3} more</span>
+            )}
+          </div>
+        </div>
+
+        <div className="mt-4 flex gap-2" style={{ marginTop: 'auto', paddingTop: 'var(--space-4)', display: 'flex' }}>
+          <Button 
+            variant="outline" 
+            fullWidth 
+            onClick={() => setActiveModal(career)}
+          >
+             View Details
+          </Button>
+          {!isExplore && (
+             <Button 
+              variant={selectedCareers.includes(career.id) ? "secondary" : "primary"}
+              fullWidth
+              onClick={() => {
+                if (selectedCareers.includes(career.id)) {
+                  setSelectedCareers(selectedCareers.filter(id => id !== career.id));
+                } else {
+                  setSelectedCareers([...selectedCareers, career.id]);
+                }
+              }}
+            >
+              {selectedCareers.includes(career.id) ? "Remove" : "Add"}
+            </Button>
           )}
-          {career.missingSkills.length > 3 && (
-            <span className="text-xs text-muted" style={{ padding: '0.25rem' }}>+{career.missingSkills.length - 3} more</span>
-          )}
         </div>
-      </div>
-
-      <div className="mt-4" style={{ marginTop: 'auto', paddingTop: 'var(--space-4)' }}>
-        <Button variant="outline" fullWidth onClick={() => setActiveModal(career)}>
-           View Career Path Details
-        </Button>
-      </div>
-    </Card>
-  );
+      </Card>
+    );
+  };
 
   const renderModal = () => {
     if (!activeModal) return null;
     const career = activeModal;
+    const isSaved = savedRoadmaps.some(r => r.id === career.id);
 
     const handleGenerateAIRoadmap = () => {
       setIsGeneratingAI(true);
@@ -198,14 +272,35 @@ const ResultsPage = () => {
       setTimeout(() => setShowAIRoadmap(false), 300); 
     };
 
-    return (
+    const handleSaveRoadmap = () => {
+      if (isSaved) {
+        unsaveRoadmap(career.id);
+      } else {
+        saveRoadmap(career);
+      }
+    };
+
+    return createPortal(
       <div className="modal-overlay" onClick={handleCloseModal}>
         <div className="modal-content" onClick={e => e.stopPropagation()}>
           <div className="modal-header">
-            <h3>{career.name} Path Details</h3>
-            <button className="modal-close-btn" onClick={handleCloseModal}>
-              <X size={20} />
-            </button>
+            <div>
+              <h3>{career.name} Path Details</h3>
+              <p className="text-xs text-muted mt-1">Explore your transition roadmap below</p>
+            </div>
+            <div className="flex gap-2">
+              <Button 
+                variant={isSaved ? "secondary" : "outline"} 
+                size="sm" 
+                onClick={handleSaveRoadmap}
+                style={{ height: '32px', fontSize: '12px' }}
+              >
+                {isSaved ? "Roadmap Saved" : "Save Roadmap"}
+              </Button>
+              <button className="modal-close-btn" onClick={handleCloseModal}>
+                <X size={20} />
+              </button>
+            </div>
           </div>
           
           <div className="modal-body">
@@ -313,7 +408,8 @@ const ResultsPage = () => {
             
           </div>
         </div>
-      </div>
+      </div>,
+      document.body
     );
   };
 
@@ -326,50 +422,101 @@ const ResultsPage = () => {
     navigate('/');
   };
 
+  const renderContent = () => {
+    switch (activeTab) {
+      case 'explore':
+        return (
+          <section className="results-section animate-fade-in">
+            <div className="section-header-row">
+              <h2 className="section-title-large">Explore All Careers</h2>
+              <p className="text-muted">Browse the system catalog to discover diverse career paths.</p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {allScoredCareers.map(career => renderCareerCard(career, false, true))}
+            </div>
+          </section>
+        );
+      case 'my-careers':
+        return (
+          <>
+            <section className="results-section">
+              <h2 className="section-title-large">Your Selected Careers</h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                {selected.length > 0 ? (
+                  selected.map((career, index) => renderCareerCard(career, index === 0))
+                ) : (
+                  <div className="col-span-3 text-center py-12 bg-surface border border-dashed border-border rounded-xl">
+                    <p className="text-muted">No careers selected yet. Go to Explore to add some!</p>
+                  </div>
+                )}
+              </div>
+            </section>
+
+            <div className="text-center" style={{ marginTop: 'var(--space-6)' }}>
+              <Button variant={showSuggested ? "secondary" : "primary"} onClick={() => setShowSuggested(!showSuggested)}>
+                {showSuggested ? "Hide Suggested Careers" : "See Suggested Careers"}
+              </Button>
+            </div>
+
+            {showSuggested && (
+              <section className="results-section suggested-section animate-fade-in">
+                <div className="suggested-header">
+                  <TrendingUp className="suggested-icon" size={24} />
+                  <div>
+                    <h2 className="section-title-large mb-1">Suggested Careers For You</h2>
+                    <p className="text-muted">Based on your priorities and skills, you may also consider these alternative paths.</p>
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-3 gap-6">
+                  {suggested.map(career => renderCareerCard(career, false))}
+                </div>
+              </section>
+            )}
+          </>
+        );
+      case 'roadmaps':
+        return (
+          <section className="results-section animate-fade-in">
+            <h2 className="section-title-large">Saved Roadmaps</h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {savedRoadmaps.length > 0 ? (
+                savedRoadmaps.map(career => renderCareerCard(career, false))
+              ) : (
+                <div className="col-span-3 text-center py-12 bg-surface border border-dashed border-border rounded-xl">
+                  <p className="text-muted">You haven't saved any roadmaps yet. Open a career detail to save its roadmap.</p>
+                </div>
+              )}
+            </div>
+          </section>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="results-page animate-fade-in">
       <div className="results-hero text-center">
-        <h1>Your Career Match Results</h1>
-        <p className="text-muted text-lg">Based on your priorities, skills, and selected paths.</p>
+        <h1>{activeTab === 'explore' ? 'Career Catalog' : activeTab === 'roadmaps' ? 'Your Roadmaps' : 'Your Career Match Results'}</h1>
+        <p className="text-muted text-lg">
+          {activeTab === 'explore' ? 'Explore and discover new career paths' : 'Based on your priorities, skills, and selected paths.'}
+        </p>
       </div>
 
-      <section className="results-section">
-        <h2 className="section-title-large">Your Selected Careers</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {selected.map((career, index) => renderCareerCard(career, index === 0))}
-        </div>
-      </section>
-
-      <div className="text-center" style={{ marginTop: 'var(--space-6)' }}>
-        <Button variant={showSuggested ? "secondary" : "primary"} onClick={() => setShowSuggested(!showSuggested)}>
-          {showSuggested ? "Hide Suggested Careers" : "See Suggested Careers"}
-        </Button>
-      </div>
-
-      {showSuggested && (
-        <section className="results-section suggested-section animate-fade-in">
-          <div className="suggested-header">
-            <TrendingUp className="suggested-icon" size={24} />
-            <div>
-              <h2 className="section-title-large mb-1">Suggested Careers For You</h2>
-              <p className="text-muted">Based on your priorities and skills, you may also consider these alternative paths.</p>
-            </div>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {suggested.map(career => renderCareerCard(career, false))}
-          </div>
-        </section>
-      )}
+      {renderContent()}
 
       {renderModal()}
 
-      <div className="results-footer text-center">
-        <Button variant="outline" onClick={resetJourney}>
-          <RefreshCcw size={18} style={{ marginRight: '8px' }} /> Start Over
-        </Button>
-      </div>
+      {activeTab === 'my-careers' && (
+        <div className="results-footer text-center">
+          <Button variant="outline" onClick={resetJourney}>
+            <RefreshCcw size={18} style={{ marginRight: '8px' }} /> Start Over
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
+
 
 export default ResultsPage;
