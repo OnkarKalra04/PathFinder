@@ -414,7 +414,7 @@ const ResultsPage = () => {
   };
 
   const resetJourney = () => {
-    setUserProfile({ education: '', fieldOfStudy: '', experience: '' });
+    setUserProfile({ name: '', education: '', fieldOfStudy: '', experience: '' });
     setUserSkills([]);
     setSelectedCareers([]);
     setPriorities({ salary: 25, wlb: 25, networking: 25, learning: 25 });

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useCareerContext } from '../context/CareerContext';
+import { useAuth } from '../context/AuthContext';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import { Target, Compass, Award, ArrowRight } from 'lucide-react';
@@ -8,6 +9,7 @@ import './LandingPage.css';
 const LandingPage = () => {
   const navigate = useNavigate();
   const { setCurrentStep } = useCareerContext();
+  const { user } = useAuth();
 
   const handleStart = () => {
     setCurrentStep(1);

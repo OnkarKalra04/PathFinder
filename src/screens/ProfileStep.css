@@ -16,10 +16,11 @@
 }
 
 .profile-form {
-  background-color: var(--color-surface);
+  background: var(--color-surface);
+  backdrop-filter: blur(12px);
   border-radius: var(--radius-xl);
   border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  box-shadow: var(--shadow-lg);
   padding: var(--space-6);
   display: flex;
   flex-direction: column;
@@ -40,9 +41,9 @@
   font-size: var(--text-base);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
-  background-color: var(--color-bg);
+  background-color: hsla(240, 15%, 5%, 0.3);
   color: var(--color-text-main);
-  transition: all var(--transition-fast);
+  transition: all var(--transition-normal);
   outline: none;
   font-family: inherit;
   appearance: none;
@@ -72,21 +73,22 @@ select.form-control {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-full);
   cursor: pointer;
-  transition: all var(--transition-fast);
-  background-color: var(--color-surface);
+  transition: all var(--transition-normal);
+  background: var(--color-surface);
   font-size: var(--text-sm);
   user-select: none;
 }
 
 .interest-card:hover {
-  border-color: var(--color-border-hover);
-  background-color: var(--color-bg);
+  border-color: var(--color-primary);
+  background: var(--color-primary-light);
 }
 
 .interest-card.selected {
-  background-color: var(--color-primary);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: white;
-  border-color: var(--color-primary);
+  border-color: transparent;
+  box-shadow: 0 4px 10px hsla(235, 85%, 65%, 0.2);
 }
 
 .skill-input-header {
@@ -200,7 +202,7 @@ select.form-control {
   border-radius: var(--radius-lg);
   padding: var(--space-6);
   margin-bottom: var(--space-6);
-  background-color: var(--color-bg);
+  background: hsla(240, 15%, 5%, 0.2);
   transition: all var(--transition-normal);
   cursor: pointer;
   position: relative;
@@ -208,7 +210,8 @@ select.form-control {
 
 .resume-upload-container:hover {
   border-color: var(--color-primary);
-  background-color: var(--color-primary-light);
+  background: var(--color-primary-light);
+  transform: translateY(-2px);
 }
 
 .hidden-input {

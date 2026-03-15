@@ -132,25 +132,26 @@
 }
 
 .flip-card-front {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  background: var(--color-surface);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-normal);
 }
 
 .flip-card-back {
-  background: var(--primary-light);
-  color: var(--text-primary);
+  background: var(--color-primary);
+  color: white;
   transform: rotateY(180deg);
-  border: 1px solid var(--primary);
-  box-shadow: 0 8px 24px rgba(var(--primary-rgb), 0.15);
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  border: 1px solid var(--color-primary);
+  box-shadow: 0 8px 24px hsla(235, 85%, 65%, 0.2);
+  transition: all var(--transition-normal);
 }
 
 .flip-card-back h4 {
   margin-top: 0;
   margin-bottom: 12px;
-  color: var(--primary);
+  color: white;
   font-size: 1.1rem;
 }
 
@@ -158,26 +159,14 @@
   font-size: 0.95rem;
   line-height: 1.5;
   margin: 0;
-  color: var(--text-secondary);
+  color: hsla(0, 0%, 100%, 0.9);
 }
 
 .flip-card-front h3 {
   margin: 0;
   font-size: 1.2rem;
   font-weight: 600;
-  color: var(--text-primary);
-}
-
-.dark .flip-card-front {
-  background: #1e293b; /* Slightly lighter than background #0f172a */
-  border-color: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.dark .flip-card-back {
-  background: #1e293b;
-  border-color: var(--primary);
-  box-shadow: 0 8px 30px rgba(var(--primary-rgb), 0.2);
+  color: var(--color-text-main);
 }
 
 /* Hover Effects */
@@ -190,19 +179,9 @@
 }
 
 .explore-card-container:hover .flip-card-front {
-  border-color: var(--primary);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-}
-
-.dark .explore-card-container:hover .flip-card-front {
-  background: #243147; /* Lighter on hover */
-  border-color: var(--primary);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5), 0 0 15px rgba(var(--primary-rgb), 0.2);
-}
-
-.dark .explore-card-container:hover .flip-card-back {
-  background: #243147;
-  box-shadow: 0 12px 40px rgba(var(--primary-rgb), 0.3);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-xl);
+  background: hsla(240, 15%, 15%, 0.8);
 }
 
 .tap-hint {
@@ -326,8 +305,9 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(15, 23, 42, 0.4);
-  backdrop-filter: blur(4px);
+  background-color: hsla(240, 15%, 4%, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;

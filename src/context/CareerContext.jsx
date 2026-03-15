@@ -1,20 +1,26 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+import { useAuth } from './AuthContext';
 
 const CareerContext = createContext();
 
 export const useCareerContext = () => useContext(CareerContext);
 
 export const CareerProvider = ({ children }) => {
+  const { sessionId } = useAuth();
+  
   // Navigation State
   const [currentStep, setCurrentStep] = useState(1);
 
   // Profile & Skills State (Step 1)
   const [userProfile, setUserProfile] = useState({
+    name: '',
     education: '',
     fieldOfStudy: '',
     experience: ''
   });
   const [userSkills, setUserSkills] = useState([]);
+  const [userInterests, setUserInterests] = useState([]);
 
   // Career Selection State (Step 2)
   const [selectedCareers, setSelectedCareers] = useState([]);
@@ -29,7 +35,55 @@ export const CareerProvider = ({ children }) => {
 
   // Saved Roadmaps State
   const [savedRoadmaps, setSavedRoadmaps] = useState([]);
-  const [activeTab, setActiveTab] = useState('my-careers'); // 'explore', 'my-careers', 'roadmaps'
+  const [activeTab, setActiveTab] = useState('my-careers');
+
+  // Load data from Supabase on mount/auth change
+  useEffect(() => {
+    if (sessionId) {
+      const fetchData = async () => {
+        const { data, error } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', sessionId)
+          .single();
+
+        if (data && !error) {
+          setUserProfile(data.profile || { name: '', education: '', fieldOfStudy: '', experience: '' });
+          setUserSkills(data.skills || []);
+          setUserInterests(data.interests || []);
+          setSelectedCareers(data.selected_careers || []);
+          setPriorities(data.priorities || { salary: 25, wlb: 25, networking: 25, learning: 25 });
+          setSavedRoadmaps(data.saved_roadmaps || []);
+        }
+      };
+      fetchData();
+    }
+  }, [sessionId]);
+
+  // Sync data to Supabase
+  useEffect(() => {
+    if (sessionId) {
+      const syncData = async () => {
+        const { error } = await supabase.from('profiles').upsert({
+          id: sessionId,
+          profile: userProfile,
+          interests: userInterests,
+          skills: userSkills,
+          selected_careers: selectedCareers,
+          priorities: priorities,
+          saved_roadmaps: savedRoadmaps,
+          updated_at: new Date().toISOString()
+        });
+
+        if (error) {
+          console.error('Failed to sync data to Supabase:', error);
+        }
+      };
+      
+      const timeoutId = setTimeout(syncData, 1000); // Debounce sync
+      return () => clearTimeout(timeoutId);
+    }
+  }, [sessionId, userProfile, userInterests, userSkills, selectedCareers, priorities, savedRoadmaps]);
 
   const saveRoadmap = (career) => {
     if (!savedRoadmaps.find(r => r.id === career.id)) {
@@ -48,6 +102,8 @@ export const CareerProvider = ({ children }) => {
     setUserProfile,
     userSkills,
     setUserSkills,
+    userInterests,
+    setUserInterests,
     selectedCareers,
     setSelectedCareers,
     priorities,

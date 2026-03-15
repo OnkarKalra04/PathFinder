@@ -15,10 +15,10 @@
 
 /* Variants */
 .btn-primary {
-  background: linear-gradient(135deg, var(--color-primary) 0%, hsl(245, 82%, 50%) 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   color: white;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
-  border: 1px solid transparent;
+  box-shadow: 0 4px 15px hsla(235, 85%, 65%, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn-primary:hover:not(:disabled) {

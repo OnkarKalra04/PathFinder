@@ -19,11 +19,18 @@ const INTERESTS_OPTIONS = [
 
 const ProfileStep = () => {
   const navigate = useNavigate();
-  const { userProfile, setUserProfile, userSkills, setUserSkills, setCurrentStep } = useCareerContext();
+  const { 
+    userProfile, 
+    setUserProfile, 
+    userSkills, 
+    setUserSkills, 
+    userInterests, 
+    setUserInterests, 
+    setCurrentStep 
+  } = useCareerContext();
 
   const [searchQuery, setSearchQuery] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [selectedInterests, setSelectedInterests] = useState([]);
   const [activeIndex, setActiveIndex] = useState(-1);
   const [isUploading, setIsUploading] = useState(false);
   const [uploadSuccess, setUploadSuccess] = useState(false);
@@ -83,7 +90,7 @@ const ProfileStep = () => {
   };
 
   const toggleInterest = (interest) => {
-    setSelectedInterests(prev => 
+    setUserInterests(prev => 
       prev.includes(interest) 
         ? prev.filter(i => i !== interest)
         : [...prev, interest]
@@ -205,7 +212,7 @@ const ProfileStep = () => {
     navigate('/step-2');
   };
 
-  const isNextDisabled = userSkills.length < 3 || userSkills.length > 15 || !userProfile.education || !userProfile.experience;
+  const isNextDisabled = userSkills.length < 3 || userSkills.length > 15 || !userProfile.education || !userProfile.experience || !userProfile.name;
   const isMaxSkillsReached = userSkills.length >= 15;
 
   return (
@@ -218,6 +225,18 @@ const ProfileStep = () => {
       </div>
 
       <div className="profile-form">
+        <div className="form-group">
+          <label>Your Name</label>
+          <input 
+            type="text" 
+            name="name" 
+            value={userProfile.name} 
+            onChange={handleProfileChange} 
+            className="form-control" 
+            placeholder="Enter your name"
+          />
+        </div>
+
         <div className="form-group grid md:grid-cols-3 gap-4">
           <div>
             <label>Education Level</label>
@@ -258,7 +277,7 @@ const ProfileStep = () => {
             {INTERESTS_OPTIONS.map(interest => (
               <div 
                 key={interest} 
-                className={`interest-card ${selectedInterests.includes(interest) ? 'selected' : ''}`}
+                className={`interest-card ${userInterests.includes(interest) ? 'selected' : ''}`}
                 onClick={() => toggleInterest(interest)}
               >
                 {interest}
@@ -297,7 +316,7 @@ const ProfileStep = () => {
                 <>
                   <Upload className="upload-icon" size={32} />
                   <span className="font-medium">Upload Resume to Auto-Fill Skills</span>
-                  <span className="text-muted text-sm">Supports PDF & DOCX</span>
+                  <span className="text-muted text-sm">Supports DOCX</span>
                   <p className="text-xs text-muted" style={{ marginTop: '4px', maxWidth: '300px' }}>
                     We'll extract your experience and automatically select matching skills below.
                   </p>
